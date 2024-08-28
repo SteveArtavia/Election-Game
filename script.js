@@ -174,6 +174,7 @@ const story = {
     texto: "Escapas con información vital, pero algo no cuadra. Cuando vuelves a revisar tus notas, te das cuenta de que la evidencia ha desaparecido. ¿Acaso todo fue una ilusión, o el Bohemian Club tiene más poder del que imaginabas? Fin.",
     opciones: {}
   }
+};
 
 
 
