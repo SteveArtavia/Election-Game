@@ -1,0 +1,33 @@
+html{
+    overflow: hidden;
+}
+body{
+    font-family: sans-serif;
+    background-color: black !important;
+    color: greenyellow !important;
+    font-family: 'Cutive Mono', monospace !important;
+}
+input{
+    background-color: black !important;
+    border: 1px solid greenyellow !important;
+    width: 300px !important;
+    color: greenyellow !important;
+    padding: 0.2em 1em;
+    text-align: center;
+}
+input:focus{
+    outline: none !important;
+}
+.card{
+    background-color: black !important;
+    color: greenyellow !important;
+    border: 1px solid greenyellow !important;
+    border-radius: 0 !important;
+}
+button{
+    background-color: greenyellow;
+    padding: 0.2em 1em;
+    border: none;
+    margin: 0 10px !important;
+}
+
