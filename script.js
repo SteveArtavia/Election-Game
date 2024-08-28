@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const startGame = () => {
-    
+    music.play();
+
     loadingScreen.style.display = 'block'
     setTimeout(() => {
         playScreen.style.display = 'block';
