@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const startGame = () => {
+
+    const music = document.getElementById('musicaFondo');
+    music.currentTime = 0;
+    music.loop = true;
     music.play();
 
     loadingScreen.style.display = 'block'
