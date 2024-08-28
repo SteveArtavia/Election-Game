@@ -1,11 +1,34 @@
 // Starting Game
 
+const intro = document.getElementById('intro');
+
 const startBtn = document.getElementById('startBtn');
 const startScreen = document.getElementById('startScreen');
 
 const playScreen = document.getElementById('playScreen');
 const loadingScreen = document.getElementById('loadingScreen');
 const playerName = document.getElementById('nameInput');
+
+document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('musicaFondo');
+    music.currentTime = 0;
+    music.loop = true;
+    music.play();
+
+    intro.style.display = 'block';
+    intro.className = 'text-center mt-4 animate__animated animate__fadeIn animate__slower'
+
+    startScreen.style.display = 'none';
+
+    setTimeout(() => {
+        intro.className = 'text-center mt-4 animate__animated animate__fadeOut animate__slower'
+    }, 2500);
+
+    setTimeout(() => {
+        startScreen.style.display = 'block'
+    }, 5000);
+
+});
 
 const startGame = () => {
     
@@ -37,11 +60,10 @@ startBtn.addEventListener('click', () => {
 const story = {
     inicio: {
         texto: `En una noche lluviosa y brumosa, el investigador se encuentra frente a las imponentes puertas del Bohemian Club, un lugar envuelto en misterio y rumores de alta sociedad. Se rumorea que detrás de sus puertas se lleva a cabo una conspiración que podría cambiar el curso de la historia. Tu misión es infiltrarte en el club y descubrir la verdad.`,
-
         opciones: {
             a: {
                 texto: 'Entrar sigilosamente',
-                siguiente: 'exploracion'
+                siguiente: 'entrada'
             },
             b: {
                 texto: 'Disfrazarse',
@@ -50,906 +72,241 @@ const story = {
         }
     },
     
-    exploracion: {
-        texto: `Decides entrar sigilosamente al Bohemian Club. Tras moverte con cautela, te encuentras en un pasillo oscuro. Al final del pasillo, escuchas un murmullo a lo lejos. También ves una puerta a la izquierda que parece llevar a un salón de eventos.`,
-
+    entrada: {
+        texto: `Decides entrar sigilosamente y te encuentras en un gran vestíbulo decorado con lujosos tapices. Desde aquí puedes ir a una sala de reuniones o explorar el sótano.`,
         opciones: {
             a: {
-                texto: 'Investigar el murmullo',
-                siguiente: 'investigacionMurmullo'
+                texto: 'Ir a la sala de reuniones',
+                siguiente: 'salaReuniones'
             },
             b: {
-                texto: 'Entrar en el salón de eventos',
-                siguiente: 'salonEventos'
+                texto: 'Explorar el sótano',
+                siguiente: 'sonido'
             }
         }
     },
-    
+
     disfraz: {
-        texto: `Con tu disfraz puesto, te mezclas con la multitud en el club. Observas a los asistentes que parecen estar discutiendo algo en secreto. Notas que algunos se dirigen a una habitación privada al fondo.`,
-
+        texto: `Te decides a ponerte un disfraz de camarero para pasar desapercibido. Entras al club y te encuentras en una cocina bulliciosa. Desde aquí puedes ir a la sala de reuniones o al área de almacenamiento.`,
         opciones: {
             a: {
-                texto: 'Unirte a la conversación',
-                siguiente: 'conversacion'
+                texto: 'Ir a la sala de reuniones',
+                siguiente: 'salaReuniones'
             },
             b: {
-                texto: 'Seguir observando desde la distancia',
-                siguiente: 'observando'
+                texto: 'Ir al área de almacenamiento',
+                siguiente: 'almacenamiento'
             }
         }
     },
 
-    investigacionMurmullo: {
-        texto: `Sigues el sonido del murmullo y llegas a una pequeña sala donde ves a un grupo de personas en una conversación secreta. Al parecer, están discutiendo sobre un plan para hacer desaparecer unos documentos importantes.`,
-
+    salaReuniones: {
+        texto: `Llegas a una elegante sala de reuniones. Aquí ves a varios miembros del club en una conversación privada. Puedes intentar escuchar la conversación o buscar documentos.`,
         opciones: {
             a: {
                 texto: 'Escuchar la conversación',
-                siguiente: 'escucharConversacion'
+                siguiente: 'escuchar'
             },
             b: {
-                texto: 'Intentar robar los documentos',
-                siguiente: 'robarDocumentos'
-            }
-        }
-    },
-    
-    salonEventos: {
-        texto: `Entras en el salón de eventos y ves una fiesta en pleno apogeo. La gente está bailando y conversando, y parece que la atención está puesta en un escenario donde hay una presentación especial.`,
-
-        opciones: {
-            a: {
-                texto: 'Investigar el escenario',
-                siguiente: 'investigarEscenario'
-            },
-            b: {
-                texto: 'Buscar entre los invitados',
-                siguiente: 'buscarInvitados'
+                texto: 'Buscar documentos',
+                siguiente: 'documentos'
             }
         }
     },
 
-    conversacion: {
-        texto: `Decides unirte a la conversación de los asistentes. La conversación gira en torno a un misterioso objeto que se ha perdido y que es crucial para el plan que están discutiendo. La conversación sugiere que el objeto está escondido en el club.`,
-
+    sonido: {
+        texto: `Bajas al sótano y te encuentras con una serie de equipos electrónicos y un ruido constante de ventiladores. Parece que hay algo sospechoso. Puedes revisar los equipos o salir del sótano.`,
         opciones: {
             a: {
-                texto: 'Preguntar sobre el objeto',
-                siguiente: 'preguntarObjeto'
+                texto: 'Revisar los equipos',
+                siguiente: 'equipos'
             },
             b: {
-                texto: 'Buscar el objeto en el club',
-                siguiente: 'buscarObjeto'
+                texto: 'Salir del sótano',
+                siguiente: 'salirSotano'
             }
         }
     },
 
-    observando: {
-        texto: `Continúas observando desde la distancia. Notas que algunos de los asistentes parecen estar más nerviosos y empiezan a actuar de manera sospechosa. Podría ser una buena idea acercarte a ellos o buscar algún indicio en la habitación.`,
-
+    almacenamiento: {
+        texto: `En el área de almacenamiento encuentras cajas apiladas y documentos dispersos. Puedes buscar entre las cajas o examinar los documentos.`,
         opciones: {
             a: {
-                texto: 'Acercarte a los sospechosos',
-                siguiente: 'acercarteSospechosos'
+                texto: 'Buscar entre las cajas',
+                siguiente: 'cajas'
             },
             b: {
-                texto: 'Buscar indicios en la habitación',
-                siguiente: 'buscarIndicios'
+                texto: 'Examinar los documentos',
+                siguiente: 'documentos'
             }
         }
     },
 
-    escucharConversacion: {
-        texto: `Escuchas atentamente la conversación. Los participantes están hablando sobre un código secreto que puede desbloquear una caja fuerte donde guardan los documentos. El código es una combinación de números que sólo algunos conocen.`,
-
+    escuchar: {
+        texto: `Escuchas fragmentos de una conversación que mencionan un "plan secreto" y una "reunión clave". No obtienes mucha información adicional, pero parece que hay algo importante que se está planeando.`,
         opciones: {
             a: {
-                texto: 'Tratar de obtener el código',
-                siguiente: 'obtenerCodigo'
+                texto: 'Seguir investigando',
+                siguiente: 'investigar'
             },
             b: {
-                texto: 'Buscar la caja fuerte',
-                siguiente: 'buscarCajaFuerte'
+                texto: 'Volver al vestíbulo',
+                siguiente: 'entrada'
             }
         }
     },
 
-    robarDocumentos: {
-        texto: `Intentas robar los documentos, pero un miembro del personal te sorprende. Tienes que decidir si luchar por escapar o rendirte y tratar de negociar.`,
-
+    documentos: {
+        texto: `Encuentras unos documentos en la sala de reuniones que hablan sobre una reunión secreta y una operación encubierta. Parece que tienes una pista importante.`,
         opciones: {
             a: {
-                texto: 'Luchar por escapar',
-                siguiente: 'lucharEscapar'
+                texto: 'Seguir los documentos',
+                siguiente: 'seguirDocumentos'
             },
             b: {
-                texto: 'Negociar con el miembro del personal',
-                siguiente: 'negociarPersonal'
+                texto: 'Volver al vestíbulo',
+                siguiente: 'entrada'
             }
         }
     },
 
-    investigarEscenario: {
-        texto: `Investigas el escenario y descubres que hay una caja oculta debajo del escenario. Parece que es un buen lugar para buscar pistas.`,
-
+    equipos: {
+        texto: `Entre los equipos encuentras un dispositivo de grabación en funcionamiento. Parece que están grabando conversaciones. Puedes intentar detener la grabación o seguir investigando.`,
         opciones: {
             a: {
-                texto: 'Abrir la caja',
-                siguiente: 'abrirCaja'
+                texto: 'Detener la grabación',
+                siguiente: 'detenerGrabacion'
             },
             b: {
-                texto: 'Buscar entre los decorados',
-                siguiente: 'buscarDecorados'
+                texto: 'Seguir investigando',
+                siguiente: 'investigar'
             }
         }
     },
 
-    buscarInvitados: {
-        texto: `Buscas entre los invitados y encuentras a un grupo que parece estar hablando sobre la seguridad de la sala privada. Podría ser útil unirte a la conversación.`,
-
+    salirSotano: {
+        texto: `Decides salir del sótano y vuelves al vestíbulo. Parece que has perdido la oportunidad de descubrir algo importante en el sótano.`,
         opciones: {
             a: {
-                texto: 'Unirte a la conversación',
-                siguiente: 'unirseConversacion'
+                texto: 'Ir a la sala de reuniones',
+                siguiente: 'salaReuniones'
             },
             b: {
-                texto: 'Continuar buscando en el salón',
-                siguiente: 'buscarSalon'
+                texto: 'Ir al área de almacenamiento',
+                siguiente: 'almacenamiento'
             }
         }
     },
 
-    preguntarObjeto: {
-        texto: `Preguntas sobre el objeto a los asistentes. Al principio parecen reacios a hablar, pero eventualmente te dicen que está escondido en una caja fuerte detrás de una pintura.`,
-
+    cajas: {
+        texto: `En las cajas encuentras algunos objetos y documentos viejos, pero nada de valor. Parece que los documentos importantes están en otro lugar.`,
         opciones: {
             a: {
-                texto: 'Buscar la pintura',
-                siguiente: 'buscarPintura'
+                texto: 'Volver al área de almacenamiento',
+                siguiente: 'almacenamiento'
             },
             b: {
-                texto: 'Investigar la caja fuerte',
-                siguiente: 'investigarCajaFuerte'
+                texto: 'Ir a la sala de reuniones',
+                siguiente: 'salaReuniones'
             }
         }
     },
 
-    buscarObjeto: {
-        texto: `Decides buscar el objeto en el club. Después de una búsqueda exhaustiva, encuentras una caja fuerte en una sala oculta.`,
-
+    investigar: {
+        texto: `Decides seguir investigando y encuentras una habitación secreta en el sótano. Parece que aquí están llevando a cabo la conspiración. Puedes intentar entrar a la habitación o regresar al vestíbulo.`,
         opciones: {
             a: {
-                texto: 'Tratar de abrir la caja fuerte',
-                siguiente: 'abrirCajaFuerte'
+                texto: 'Entrar a la habitación secreta',
+                siguiente: 'habitaciónSecreta'
             },
             b: {
-                texto: 'Buscar el código para abrir la caja fuerte',
-                siguiente: 'buscarCodigoCajaFuerte'
+                texto: 'Regresar al vestíbulo',
+                siguiente: 'entrada'
             }
         }
     },
 
-    acercarteSospechosos: {
-        texto: `Te acercas a los sospechosos y logras escuchar parte de su conversación. Hablan sobre un punto de entrega secreto en el club donde realizarán una transacción.`,
-
+    seguirDocumentos: {
+        texto: `Sigues los documentos y descubres que están relacionados con una reunión secreta en la noche. Tienes la dirección y la hora de la reunión. Parece que has descubierto una pista clave.`,
         opciones: {
             a: {
-                texto: 'Seguirlos al punto de entrega',
-                siguiente: 'seguirPuntoEntrega'
+                texto: 'Ir a la reunión',
+                siguiente: 'reunion'
             },
             b: {
-                texto: 'Informar a las autoridades',
-                siguiente: 'informarAutoridades'
+                texto: 'Regresar al vestíbulo',
+                siguiente: 'entrada'
             }
         }
     },
 
-    buscarIndicios: {
-        texto: `Buscas indicios en la habitación y encuentras una nota con información sobre el punto de entrega secreto. La nota también menciona una hora específica para la transacción.`,
-
+    detenerGrabacion: {
+        texto: `Decides detener la grabación y encuentras información importante sobre una conspiración. Parece que tienes pruebas suficientes para llevar a cabo una denuncia.`,
         opciones: {
             a: {
-                texto: 'Ir al punto de entrega',
-                siguiente: 'irPuntoEntrega'
+                texto: 'Regresar al vestíbulo',
+                siguiente: 'entrada'
             },
             b: {
-                texto: 'Esperar y observar',
-                siguiente: 'esperarObservar'
+                texto: 'Volver a revisar los documentos',
+                siguiente: 'documentos'
             }
         }
     },
 
-    obtenerCodigo: {
-        texto: `Tratas de obtener el código para la caja fuerte. Algunos asistentes se dan cuenta de que estás interesado y empiezan a sospechar. Debes actuar rápido.`,
-
+    habitacionSecreta: {
+        texto: `En la habitación secreta encuentras a varios miembros del club discutiendo planes. Tienes la oportunidad de escuchar su conversación o tomar fotos como evidencia.`,
         opciones: {
             a: {
-                texto: 'Intentar obtener el código de forma discreta',
-                siguiente: 'obtenerCodigoDiscreto'
+                texto: 'Escuchar la conversación',
+                siguiente: 'escuchar'
             },
             b: {
-                texto: 'Buscar otra manera de abrir la caja fuerte',
-                siguiente: 'buscarManeraCajaFuerte'
+                texto: 'Tomar fotos',
+                siguiente: 'fotos'
             }
         }
     },
 
-    buscarCajaFuerte: {
-        texto: `Buscas la caja fuerte en la sala y la encuentras detrás de un armario. Está bien escondida y parece que requiere un código para abrirla.`,
-
+    reunion: {
+        texto: `Asistes a la reunión y descubres detalles importantes sobre la conspiración. Has reunido suficiente evidencia para resolver el caso.`,
         opciones: {
             a: {
-                texto: 'Intentar forzar la caja fuerte',
-                siguiente: 'forzarCajaFuerte'
-            },
-            b: {
-                texto: 'Buscar el código en la sala',
-                siguiente: 'buscarCodigoSala'
-            }
-        }
-    },
-
-    lucharEscapar: {
-        texto: `Decides luchar para escapar. La confrontación es intensa, pero logras salir con algunos documentos importantes en tu poder. La misión es un éxito parcial.`,
-
-        opciones: {
-            a: {
-                texto: 'Investigar los documentos',
-                siguiente: 'investigarDocumentos'
-            },
-            b: {
-                texto: 'Informar a las autoridades',
-                siguiente: 'informarAutoridades'
-            }
-        }
-    },
-
-    negociarPersonal: {
-        texto: `Negocias con el miembro del personal y logras convencerlo de que te deje ir. Mantienes los documentos, pero el personal ahora está más alerta.`,
-
-        opciones: {
-            a: {
-                texto: 'Escapar rápidamente',
-                siguiente: 'escaparRapido'
-            },
-            b: {
-                texto: 'Buscar un escondite temporal',
-                siguiente: 'esconderte'
-            }
-        }
-    },
-
-    abrirCaja: {
-        texto: `Abres la caja y encuentras una serie de documentos importantes que parecen ser clave para el misterio que estás investigando.`,
-
-        opciones: {
-            a: {
-                texto: 'Leer los documentos',
-                siguiente: 'leerDocumentos'
-            },
-            b: {
-                texto: 'Llevar los documentos al investigador jefe',
-                siguiente: 'llevarInvestigador'
-            }
-        }
-    },
-
-    buscarDecorados: {
-        texto: `Buscas entre los decorados y encuentras una pista que te lleva a una habitación oculta. En esta habitación encuentras más pistas sobre la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Explorar la habitación oculta',
-                siguiente: 'explorarHabitacion'
-            },
-            b: {
-                texto: 'Volver al salón principal',
-                siguiente: 'volverSalonPrincipal'
-            }
-        }
-    },
-
-    buscarPintura: {
-        texto: `Buscas la pintura mencionada y encuentras una caja fuerte escondida detrás de ella. La caja fuerte parece tener un mecanismo de apertura complicado.`,
-
-        opciones: {
-            a: {
-                texto: 'Intentar abrir la caja fuerte',
-                siguiente: 'abrirCajaFuerte'
-            },
-            b: {
-                texto: 'Buscar el código para abrirla',
-                siguiente: 'buscarCodigoCajaFuerte'
-            }
-        }
-    },
-
-    investigarCajaFuerte: {
-        texto: `Investigas la caja fuerte y encuentras que tiene un código. La combinación parece estar en un libro antiguo en la biblioteca del club.`,
-
-        opciones: {
-            a: {
-                texto: 'Buscar en la biblioteca',
-                siguiente: 'buscarBiblioteca'
-            },
-            b: {
-                texto: 'Intentar abrir la caja fuerte sin el código',
-                siguiente: 'abrirSinCodigo'
-            }
-        }
-    },
-
-    abrirCajaFuerte: {
-        texto: `Intentas abrir la caja fuerte. Después de algunos intentos fallidos, finalmente logras abrirla y encuentras documentos cruciales que revelan la verdad detrás de la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Leer los documentos',
-                siguiente: 'leerDocumentos'
-            },
-            b: {
-                texto: 'Salir rápidamente del club',
-                siguiente: 'salirClub'
-            }
-        }
-    },
-
-    buscarCodigoCajaFuerte: {
-        texto: `Buscas el código para abrir la caja fuerte. Después de una exhaustiva búsqueda, encuentras una nota con el código en un libro antiguo.`,
-
-        opciones: {
-            a: {
-                texto: 'Usar el código para abrir la caja fuerte',
-                siguiente: 'abrirCajaFuerte'
-            },
-            b: {
-                texto: 'Investigar el libro para más pistas',
-                siguiente: 'investigarLibro'
-            }
-        }
-    },
-
-    irPuntoEntrega: {
-        texto: `Vas al punto de entrega y descubres una transacción sospechosa. Los detalles de la transacción confirman la conspiración en el club.`,
-
-        opciones: {
-            a: {
-                texto: 'Recoger pruebas de la transacción',
-                siguiente: 'recogerPruebas'
-            },
-            b: {
-                texto: 'Informar a las autoridades',
-                siguiente: 'informarAutoridades'
-            }
-        }
-    },
-
-    esperarObservar: {
-        texto: `Decides esperar y observar. Después de un tiempo, ves a varias personas que parecen estar implicadas en la conspiración. Recopilas información importante.`,
-
-        opciones: {
-            a: {
-                texto: 'Documentar la información',
-                siguiente: 'documentarInformacion'
-            },
-            b: {
-                texto: 'Reportar a las autoridades',
-                siguiente: 'reportarAutoridades'
-            }
-        }
-    },
-
-    obtenerCodigoDiscreto: {
-        texto: `Intentas obtener el código de manera discreta. Logras conseguir la información sin levantar sospechas y obtienes el código para la caja fuerte.`,
-
-        opciones: {
-            a: {
-                texto: 'Abrir la caja fuerte con el código',
-                siguiente: 'abrirCajaFuerte'
-            },
-            b: {
-                texto: 'Buscar más pistas en el club',
-                siguiente: 'buscarPistasClub'
-            }
-        }
-    },
-
-    buscarManeraCajaFuerte: {
-        texto: `Buscas otra manera de abrir la caja fuerte. Encuentras un manual que detalla cómo abrir la caja fuerte sin el código.`,
-
-        opciones: {
-            a: {
-                texto: 'Usar el manual para abrir la caja fuerte',
-                siguiente: 'abrirCajaFuerte'
-            },
-            b: {
-                texto: 'Buscar el código en otros lugares',
-                siguiente: 'buscarCodigoOtrosLugares'
-            }
-        }
-    },
-
-    forzarCajaFuerte: {
-        texto: `Intentas forzar la caja fuerte, pero el mecanismo está muy bien asegurado. Puedes llamar la atención de la seguridad.`,
-
-        opciones: {
-            a: {
-                texto: 'Volver a intentar forzar la caja',
-                siguiente: 'forzarCaja'
-            },
-            b: {
-                texto: 'Buscar una alternativa para abrirla',
-                siguiente: 'buscarAlternativa'
-            }
-        }
-    },
-
-    buscarCodigoSala: {
-        texto: `Buscas el código en la sala. Encuentras una pista que te lleva a un libro antiguo en la biblioteca.`,
-
-        opciones: {
-            a: {
-                texto: 'Buscar el libro en la biblioteca',
-                siguiente: 'buscarLibroBiblioteca'
-            },
-            b: {
-                texto: 'Buscar más en la sala',
-                siguiente: 'buscarMasSala'
-            }
-        }
-    },
-
-    investigarLibro: {
-        texto: `Investigas el libro y encuentras una pista sobre la ubicación de la caja fuerte. La pista también sugiere cómo abrirla.`,
-
-        opciones: {
-            a: {
-                texto: 'Abrir la caja fuerte usando la pista',
-                siguiente: 'abrirCajaConPista'
-            },
-            b: {
-                texto: 'Buscar otras pistas en el libro',
-                siguiente: 'buscarOtrasPistas'
-            }
-        }
-    },
-
-    abrirCajaConPista: {
-        texto: `Usas la pista del libro para abrir la caja fuerte. Encuentras documentos importantes que revelan la verdad detrás de la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Leer los documentos',
-                siguiente: 'leerDocumentos'
-            },
-            b: {
-                texto: 'Salir del club con los documentos',
-                siguiente: 'salirConDocumentos'
-            }
-        }
-    },
-
-    buscarBiblioteca: {
-        texto: `Buscas en la biblioteca y encuentras varios libros antiguos. Uno de ellos parece tener información sobre el código de la caja fuerte.`,
-
-        opciones: {
-            a: {
-                texto: 'Leer el libro',
-                siguiente: 'leerLibroBiblioteca'
-            },
-            b: {
-                texto: 'Buscar otros libros',
-                siguiente: 'buscarOtrosLibros'
-            }
-        }
-    },
-
-    abrirSinCodigo: {
-        texto: `Intentas abrir la caja fuerte sin el código, pero no logras acceder a ella. Necesitarás el código para continuar.`,
-
-        opciones: {
-            a: {
-                texto: 'Buscar el código en el club',
-                siguiente: 'buscarCodigoClub'
-            },
-            b: {
-                texto: 'Intentar otra forma de abrir la caja',
-                siguiente: 'intentarOtraForma'
-            }
-        }
-    },
-
-    escaparRapido: {
-        texto: `Escapas rápidamente del club antes de que la seguridad te detecte. La misión es exitosa, pero debes mantenerte alerta.`,
-
-        opciones: {
-            a: {
-                texto: 'Analizar la información obtenida',
-                siguiente: 'analizarInformacion'
-            },
-            b: {
-                texto: 'Reportar el incidente a las autoridades',
-                siguiente: 'reportarIncidente'
-            }
-        }
-    },
-
-    esconderte: {
-        texto: `Buscas un escondite temporal y logras evadir a la seguridad por un tiempo. Sin embargo, debes ser rápido para evitar ser atrapado.`,
-
-        opciones: {
-            a: {
-                texto: 'Buscar una salida segura',
-                siguiente: 'buscarSalidaSegura'
-            },
-            b: {
-                texto: 'Esperar hasta que la seguridad se calme',
-                siguiente: 'esperarSeguridad'
-            }
-        }
-    },
-
-    leerDocumentos: {
-        texto: `Lees los documentos y descubres información crucial sobre la conspiración. Esta información podría cambiar el curso de la investigación.`,
-
-        opciones: {
-            a: {
-                texto: 'Compartir la información con el equipo',
-                siguiente: 'compartirInformacion'
-            },
-            b: {
-                texto: 'Guardar la información para más adelante',
-                siguiente: 'guardarInformacion'
-            }
-        }
-    },
-
-    salirClub: {
-        texto: `Sales rápidamente del club con los documentos. Ahora tienes que decidir qué hacer con la información.`,
-
-        opciones: {
-            a: {
-                texto: 'Investigar más a fondo',
-                siguiente: 'investigarMas'
-            },
-            b: {
-                texto: 'Reportar a las autoridades',
-                siguiente: 'reportarAutoridades'
-            }
-        }
-    },
-
-    analizarInformacion: {
-        texto: `Analizas la información obtenida y encuentras pistas adicionales sobre la conspiración. Estas pistas podrían ser vitales para resolver el caso.`,
-
-        opciones: {
-            a: {
-                texto: 'Seguir la pista principal',
-                siguiente: 'seguirPistaPrincipal'
-            },
-            b: {
-                texto: 'Investigar otras pistas',
-                siguiente: 'investigarOtrasPistas'
-            }
-        }
-    },
-
-    reportarIncidente: {
-        texto: `Reportas el incidente a las autoridades. Tu valentía podría llevar a una mayor investigación sobre la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Esperar respuesta de las autoridades',
-                siguiente: 'esperarRespuesta'
-            },
-            b: {
-                texto: 'Continuar investigando por tu cuenta',
-                siguiente: 'investigarPorCuenta'
-            }
-        }
-    },
-
-    buscarPistasClub: {
-        texto: `Buscas más pistas en el club y encuentras un documento que menciona la ubicación de la caja fuerte.`,
-
-        opciones: {
-            a: {
-                texto: 'Ir a la ubicación mencionada',
-                siguiente: 'irUbicacionCaja'
-            },
-            b: {
-                texto: 'Seguir buscando más pistas',
-                siguiente: 'seguirBuscandoPistas'
-            }
-        }
-    },
-
-    buscarCodigoOtrosLugares: {
-        texto: `Buscas el código en otros lugares del club, pero no encuentras nada nuevo. Podría ser útil regresar a la biblioteca.`,
-
-        opciones: {
-            a: {
-                texto: 'Regresar a la biblioteca',
-                siguiente: 'buscarBiblioteca'
-            },
-            b: {
-                texto: 'Buscar en otras áreas del club',
-                siguiente: 'buscarOtrasAreas'
-            }
-        }
-    },
-
-    abrirCajaConPista: {
-        texto: `Usas la pista del libro para abrir la caja fuerte. Encuentras documentos importantes que revelan la verdad detrás de la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Leer los documentos',
-                siguiente: 'leerDocumentos'
-            },
-            b: {
-                texto: 'Salir del club con los documentos',
-                siguiente: 'salirConDocumentos'
-            }
-        }
-    },
-
-    investigarOtrasPistas: {
-        texto: `Investigas otras pistas y encuentras una red de contactos involucrados en la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Seguir la red de contactos',
-                siguiente: 'seguirRedContactos'
-            },
-            b: {
-                texto: 'Buscar más pistas',
-                siguiente: 'buscarMasPistas'
-            }
-        }
-    },
-
-    seguirPistaPrincipal: {
-        texto: `Sigues la pista principal y descubres una conexión con una organización secreta.`,
-
-        opciones: {
-            a: {
-                texto: 'Profundizar en la organización secreta',
-                siguiente: 'profundizarOrganizacion'
-            },
-            b: {
-                texto: 'Buscar más información sobre la conexión',
-                siguiente: 'buscarInformacionConexion'
-            }
-        }
-    },
-
-    investigarPorCuenta: {
-        texto: `Decides continuar investigando por tu cuenta. Encuentras más detalles sobre la conspiración que podrían ser cruciales.`,
-
-        opciones: {
-            a: {
-                texto: 'Preparar un informe',
-                siguiente: 'prepararInforme'
-            },
-            b: {
-                texto: 'Continuar la investigación',
-                siguiente: 'continuarInvestigacion'
-            }
-        }
-    },
-
-    prepararInforme: {
-        texto: `Preparas un informe detallado sobre la conspiración. Tu informe podría ayudar a desmantelar la red de corrupción.`,
-
-        opciones: {
-            a: {
-                texto: 'Enviar el informe a las autoridades',
-                siguiente: 'enviarInforme'
-            },
-            b: {
-                texto: 'Guardar el informe para ti',
-                siguiente: 'guardarInforme'
-            }
-        }
-    },
-
-    seguirRedContactos: {
-        texto: `Sigues la red de contactos y encuentras a varios miembros clave de la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Investigar a los miembros clave',
-                siguiente: 'investigarMiembrosClave'
-            },
-            b: {
-                texto: 'Informar a las autoridades sobre los miembros',
-                siguiente: 'informarMiembros'
-            }
-        }
-    },
-
-    profundidadOrganizacion: {
-        texto: `Profundizas en la organización secreta y descubres sus planes. Tu investigación revela una amenaza mayor.`,
-
-        opciones: {
-            a: {
-                texto: 'Exponer los planes de la organización',
-                siguiente: 'exponerPlanes'
-            },
-            b: {
-                texto: 'Continuar investigando más detalles',
-                siguiente: 'continuarInvestigando'
-            }
-        }
-    },
-
-    enviarInforme: {
-        texto: `Envías el informe a las autoridades. La información podría llevar a una gran operación contra la conspiración.`,
-
-        opciones: {
-            a: {
-                texto: 'Esperar respuesta de las autoridades',
-                siguiente: 'esperarRespuesta'
-            },
-            b: {
-                texto: 'Continuar investigando por tu cuenta',
-                siguiente: 'investigarPorCuenta'
-            }
-        }
-    },
-
-    guardarInforme: {
-        texto: `Guardas el informe para ti. Esto te da tiempo para considerar los próximos pasos.`,
-
-        opciones: {
-            a: {
-                texto: 'Preparar una presentación del informe',
-                siguiente: 'prepararPresentacion'
+                texto: 'Denunciar la conspiración',
+                siguiente: 'denunciar'
             },
             b: {
                 texto: 'Continuar investigando',
-                siguiente: 'continuarInvestigando'
+                siguiente: 'investigar'
             }
         }
     },
 
-    prepararPresentacion: {
-        texto: `Preparas una presentación del informe. Esta presentación podría ayudarte a exponer la conspiración de manera efectiva.`,
-
+    fotos: {
+        texto: `Tomas fotos y tienes evidencia sólida de la conspiración. Ahora puedes proceder a hacer una denuncia.`,
         opciones: {
             a: {
-                texto: 'Presentar la información a las autoridades',
-                siguiente: 'presentarInformacion'
+                texto: 'Denunciar la conspiración',
+                siguiente: 'denunciar'
             },
             b: {
-                texto: 'Guardar la presentación para otro momento',
-                siguiente: 'guardarPresentacion'
+                texto: 'Continuar investigando',
+                siguiente: 'investigar'
             }
         }
     },
 
-    presentarInformacion: {
-        texto: `Presentas la información a las autoridades. Tu investigación ha ayudado a desmantelar la conspiración.`,
-
+    denunciar: {
+        texto: `Has denunciado la conspiración y la verdad sale a la luz. La conspiración es desmantelada y el caso se resuelve exitosamente. ¡Felicidades!`,
         opciones: {
             a: {
-                texto: 'Recibir reconocimiento por tu trabajo',
-                siguiente: 'recibirReconocimiento'
-            },
-            b: {
-                texto: 'Continuar con nuevas investigaciones',
-                siguiente: 'continuarNuevasInvestigaciones'
-            }
-        }
-    },
-
-    recibirReconocimiento: {
-        texto: `Recibes reconocimiento por tu trabajo. Tu valentía y habilidades han tenido un impacto significativo.`,
-
-        opciones: {
-            a: {
-                texto: 'Aceptar el reconocimiento',
-                siguiente: 'aceptarReconocimiento'
-            },
-            b: {
-                texto: 'Seguir trabajando en otras investigaciones',
-                siguiente: 'seguirInvestigaciones'
-            }
-        }
-    },
-
-    aceptarReconocimiento: {
-        texto: `Aceptas el reconocimiento con gratitud. Tu trabajo ha sido invaluable para resolver el caso.`,
-
-        opciones: {
-            a: {
-                texto: 'Celebrar tu éxito',
-                siguiente: 'celebrarExito'
-            },
-            b: {
-                texto: 'Empezar una nueva investigación',
-                siguiente: 'nuevaInvestigacion'
-            }
-        }
-    },
-
-    celebrarExito: {
-        texto: `Celebras tu éxito con amigos y colegas. Te sientes satisfecho con el trabajo bien hecho.`,
-
-        opciones: {
-            a: {
-                texto: 'Descansar y reflexionar',
-                siguiente: 'descansarReflexionar'
-            },
-            b: {
-                texto: 'Iniciar una nueva misión',
-                siguiente: 'nuevaMision'
-            }
-        }
-    },
-
-    nuevaInvestigacion: {
-        texto: `Empiezas una nueva investigación. Estás listo para enfrentar nuevos desafíos.`,
-
-        opciones: {
-            a: {
-                texto: 'Preparar tu equipo',
-                siguiente: 'prepararEquipo'
-            },
-            b: {
-                texto: 'Investigar la nueva pista',
-                siguiente: 'investigarNuevaPista'
-            }
-        }
-    },
-
-    descansarReflexionar: {
-        texto: `Descansas y reflexionas sobre tu éxito. Estás listo para futuras aventuras.`,
-
-        opciones: {
-            a: {
-                texto: 'Planificar tu próximo paso',
-                siguiente: 'planificarProximoPaso'
-            },
-            b: {
-                texto: 'Disfrutar del descanso',
-                siguiente: 'disfrutarDescanso'
-            }
-        }
-    },
-
-    planificarProximoPaso: {
-        texto: `Planificas tu próximo paso. Estás preparado para enfrentar cualquier desafío que venga.`,
-
-        opciones: {
-            a: {
-                texto: 'Empezar una nueva investigación',
-                siguiente: 'nuevaInvestigacion'
-            },
-            b: {
-                texto: 'Buscar nuevas oportunidades',
-                siguiente: 'buscarNuevasOportunidades'
-            }
-        }
-    },
-
-    disfrutarDescanso: {
-        texto: `Disfrutas del descanso y te preparas para futuros desafíos. Estás en un buen lugar.`,
-
-        opciones: {
-            a: {
-                texto: 'Volver a la acción',
-                siguiente: 'volverAccion'
-            },
-            b: {
-                texto: 'Buscar nuevas metas',
-                siguiente: 'buscarNuevasMetas'
+                texto: 'Volver al inicio',
+                siguiente: 'inicio'
             }
         }
     }
 };
+
 
 
 let seccionActual = 'inicio';
@@ -962,6 +319,12 @@ const renderStory = () => {
     const mensaje = section.texto;
     displayTexto.innerHTML = mensaje;
 
+    if(seccionActual ==="entrada"){
+        const sonidoPuerta = document.getElementById('sonidoPuerta');
+        sonidoPuerta.currentTime = 0;
+        sonidoPuerta.play();
+    }
+
     optionsContainer.innerHTML = '';
 
     for (const key in section.opciones){
@@ -969,6 +332,10 @@ const renderStory = () => {
         const button = document.createElement('button');
         button.textContent = opcion.texto;
         button.addEventListener('click', () => {
+            const sound = document.getElementById('buttonSound');
+            sound.currentTime =0;
+            sound.play();
+
             seccionActual = opcion.siguiente;
             renderStory();
         });
