@@ -63,254 +63,117 @@ startBtn.addEventListener('click', () => {
 // Game Logic
 
 const story = {
-    inicio: {
-        texto: `En una noche lluviosa y brumosa, el investigador se encuentra frente a las imponentes puertas del Bohemian Club, un lugar envuelto en misterio y rumores de alta sociedad. Se rumorea que detrás de sus puertas se lleva a cabo una conspiración que podría cambiar el curso de la historia. Tu misión es infiltrarte en el club y descubrir la verdad.`,
-        opciones: {
-            a: {
-                texto: 'Entrar sigilosamente',
-                siguiente: 'entrada'
-            },
-            b: {
-                texto: 'Disfrazarse',
-                siguiente: 'disfraz'
-            }
-        }
-    },
-    
-    entrada: {
-        texto: `Decides entrar sigilosamente y te encuentras en un gran vestíbulo decorado con lujosos tapices. Desde aquí puedes ir a una sala de reuniones o explorar el sótano.`,
-        opciones: {
-            a: {
-                texto: 'Ir a la sala de reuniones',
-                siguiente: 'salaReuniones'
-            },
-            b: {
-                texto: 'Explorar el sótano',
-                siguiente: 'sonido'
-            }
-        }
-    },
-
-    disfraz: {
-        texto: `Te decides a ponerte un disfraz de camarero para pasar desapercibido. Entras al club y te encuentras en una cocina bulliciosa. Desde aquí puedes ir a la sala de reuniones o al área de almacenamiento.`,
-        opciones: {
-            a: {
-                texto: 'Ir a la sala de reuniones',
-                siguiente: 'salaReuniones'
-            },
-            b: {
-                texto: 'Ir al área de almacenamiento',
-                siguiente: 'almacenamiento'
-            }
-        }
-    },
-
-    salaReuniones: {
-        texto: `Llegas a una elegante sala de reuniones. Aquí ves a varios miembros del club en una conversación privada. Puedes intentar escuchar la conversación o buscar documentos.`,
-        opciones: {
-            a: {
-                texto: 'Escuchar la conversación',
-                siguiente: 'escuchar'
-            },
-            b: {
-                texto: 'Buscar documentos',
-                siguiente: 'documentos'
-            }
-        }
-    },
-
-    sonido: {
-        texto: `Bajas al sótano y te encuentras con una serie de equipos electrónicos y un ruido constante de ventiladores. Parece que hay algo sospechoso. Puedes revisar los equipos o salir del sótano.`,
-        opciones: {
-            a: {
-                texto: 'Revisar los equipos',
-                siguiente: 'equipos'
-            },
-            b: {
-                texto: 'Salir del sótano',
-                siguiente: 'salirSotano'
-            }
-        }
-    },
-
-    almacenamiento: {
-        texto: `En el área de almacenamiento encuentras cajas apiladas y documentos dispersos. Puedes buscar entre las cajas o examinar los documentos.`,
-        opciones: {
-            a: {
-                texto: 'Buscar entre las cajas',
-                siguiente: 'cajas'
-            },
-            b: {
-                texto: 'Examinar los documentos',
-                siguiente: 'documentos'
-            }
-        }
-    },
-
-    escuchar: {
-        texto: `Escuchas fragmentos de una conversación que mencionan un "plan secreto" y una "reunión clave". No obtienes mucha información adicional, pero parece que hay algo importante que se está planeando.`,
-        opciones: {
-            a: {
-                texto: 'Seguir investigando',
-                siguiente: 'investigar'
-            },
-            b: {
-                texto: 'Volver al vestíbulo',
-                siguiente: 'entrada'
-            }
-        }
-    },
-
-    documentos: {
-        texto: `Encuentras unos documentos en la sala de reuniones que hablan sobre una reunión secreta y una operación encubierta. Parece que tienes una pista importante.`,
-        opciones: {
-            a: {
-                texto: 'Seguir los documentos',
-                siguiente: 'seguirDocumentos'
-            },
-            b: {
-                texto: 'Volver al vestíbulo',
-                siguiente: 'entrada'
-            }
-        }
-    },
-
-    equipos: {
-        texto: `Entre los equipos encuentras un dispositivo de grabación en funcionamiento. Parece que están grabando conversaciones. Puedes intentar detener la grabación o seguir investigando.`,
-        opciones: {
-            a: {
-                texto: 'Detener la grabación',
-                siguiente: 'detenerGrabacion'
-            },
-            b: {
-                texto: 'Seguir investigando',
-                siguiente: 'investigar'
-            }
-        }
-    },
-
-    salirSotano: {
-        texto: `Decides salir del sótano y vuelves al vestíbulo. Parece que has perdido la oportunidad de descubrir algo importante en el sótano.`,
-        opciones: {
-            a: {
-                texto: 'Ir a la sala de reuniones',
-                siguiente: 'salaReuniones'
-            },
-            b: {
-                texto: 'Ir al área de almacenamiento',
-                siguiente: 'almacenamiento'
-            }
-        }
-    },
-
-    cajas: {
-        texto: `En las cajas encuentras algunos objetos y documentos viejos, pero nada de valor. Parece que los documentos importantes están en otro lugar.`,
-        opciones: {
-            a: {
-                texto: 'Volver al área de almacenamiento',
-                siguiente: 'almacenamiento'
-            },
-            b: {
-                texto: 'Ir a la sala de reuniones',
-                siguiente: 'salaReuniones'
-            }
-        }
-    },
-
-    investigar: {
-        texto: `Decides seguir investigando y encuentras una habitación secreta en el sótano. Parece que aquí están llevando a cabo la conspiración. Puedes intentar entrar a la habitación o regresar al vestíbulo.`,
-        opciones: {
-            a: {
-                texto: 'Entrar a la habitación secreta',
-                siguiente: 'habitaciónSecreta'
-            },
-            b: {
-                texto: 'Regresar al vestíbulo',
-                siguiente: 'entrada'
-            }
-        }
-    },
-
-    seguirDocumentos: {
-        texto: `Sigues los documentos y descubres que están relacionados con una reunión secreta en la noche. Tienes la dirección y la hora de la reunión. Parece que has descubierto una pista clave.`,
-        opciones: {
-            a: {
-                texto: 'Ir a la reunión',
-                siguiente: 'reunion'
-            },
-            b: {
-                texto: 'Regresar al vestíbulo',
-                siguiente: 'entrada'
-            }
-        }
-    },
-
-    detenerGrabacion: {
-        texto: `Decides detener la grabación y encuentras información importante sobre una conspiración. Parece que tienes pruebas suficientes para llevar a cabo una denuncia.`,
-        opciones: {
-            a: {
-                texto: 'Regresar al vestíbulo',
-                siguiente: 'entrada'
-            },
-            b: {
-                texto: 'Volver a revisar los documentos',
-                siguiente: 'documentos'
-            }
-        }
-    },
-
-    habitacionSecreta: {
-        texto: `En la habitación secreta encuentras a varios miembros del club discutiendo planes. Tienes la oportunidad de escuchar su conversación o tomar fotos como evidencia.`,
-        opciones: {
-            a: {
-                texto: 'Escuchar la conversación',
-                siguiente: 'escuchar'
-            },
-            b: {
-                texto: 'Tomar fotos',
-                siguiente: 'fotos'
-            }
-        }
-    },
-
-    reunion: {
-        texto: `Asistes a la reunión y descubres detalles importantes sobre la conspiración. Has reunido suficiente evidencia para resolver el caso.`,
-        opciones: {
-            a: {
-                texto: 'Denunciar la conspiración',
-                siguiente: 'denunciar'
-            },
-            b: {
-                texto: 'Continuar investigando',
-                siguiente: 'investigar'
-            }
-        }
-    },
-
-    fotos: {
-        texto: `Tomas fotos y tienes evidencia sólida de la conspiración. Ahora puedes proceder a hacer una denuncia.`,
-        opciones: {
-            a: {
-                texto: 'Denunciar la conspiración',
-                siguiente: 'denunciar'
-            },
-            b: {
-                texto: 'Continuar investigando',
-                siguiente: 'investigar'
-            }
-        }
-    },
-
-    denunciar: {
-        texto: `Has denunciado la conspiración y la verdad sale a la luz. La conspiración es desmantelada y el caso se resuelve exitosamente. ¡Felicidades!`,
-        opciones: {
-            a: {
-                texto: 'Volver al inicio',
-                siguiente: 'inicio'
-            }
-        }
+  // Nodo Inicial
+  inicio: {
+    texto: "Eres un investigador privado que ha recibido una pista sobre una peligrosa conspiración en un lugar conocido como El Bohemian Club. Llegas al lugar bajo la oscuridad de la noche. La atmósfera es tensa, y sabes que cada paso podría llevarte más cerca de la verdad... o del peligro. ¿Qué haces primero?",
+    opciones: {
+      a: { texto: "Entrar al club por la puerta principal", siguiente: "entrarPrincipal" },
+      b: { texto: "Buscar una entrada trasera", siguiente: "buscarTrasera" },
+      c: { texto: "Observar desde la distancia", siguiente: "observarDistancia" }
     }
-};
+  },
+
+  // Entrar por la puerta principal
+  entrarPrincipal: {
+    texto: "Decides entrar por la puerta principal, tratando de parecer lo más natural posible. Al cruzar el umbral, eres recibido por una sala lujosamente decorada. Sin embargo, un guardia se aproxima hacia ti con una mirada sospechosa. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Inventar una historia convincente", siguiente: "inventarHistoria" },
+      b: { texto: "Escapar hacia una sala lateral", siguiente: "escaparSalaLateral" },
+      c: { texto: "Enfrentar al guardia", siguiente: "enfrentarGuardia" }
+    }
+  },
+
+  // Buscar una entrada trasera
+  buscarTrasera: {
+    texto: "Rodeas el edificio en busca de una entrada trasera. Finalmente, encuentras una puerta pequeña y poco vigilada. La abres con cautela y te encuentras en un oscuro pasillo subterráneo. Oyes voces a lo lejos. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Seguir las voces", siguiente: "seguirVoces" },
+      b: { texto: "Esconderte en las sombras", siguiente: "esconderSombras" },
+      c: { texto: "Intentar encontrar un mapa del lugar", siguiente: "encontrarMapa" }
+    }
+  },
+
+  // Observar desde la distancia
+  observarDistancia: {
+    texto: "Decides mantenerte oculto y observar desde la distancia. Desde las sombras, ves a varios hombres poderosos entrar en el club, sus rostros son conocidos en las altas esferas. Alguien menciona 'el ritual'. Sabes que necesitas acercarte más. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Acercarte sigilosamente", siguiente: "acercarSigilosamente" },
+      b: { texto: "Buscar otra manera de infiltrarte", siguiente: "infiltrarteOtra" },
+      c: { texto: "Seguir observando", siguiente: "seguirObservando" }
+    }
+  },
+
+  // Nodo después de "Entrar por la puerta principal"
+  inventarHistoria: {
+    texto: "Con nervios de acero, inventas una historia sobre ser un nuevo miembro invitado por uno de los socios. El guardia parece dudoso pero finalmente te deja pasar. Ahora dentro, te encuentras en un salón de reuniones donde los líderes están discutiendo algo secreto. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Escuchar la conversación", siguiente: "escucharConversacion" },
+      b: { texto: "Tomar una copa y mezclarse", siguiente: "mezclarse" },
+      c: { texto: "Buscar documentos importantes", siguiente: "buscarDocumentos" }
+    }
+  },
+
+  escaparSalaLateral: {
+    texto: "Escapas rápidamente hacia una sala lateral, cerrando la puerta tras de ti. Dentro, encuentras una biblioteca llena de libros antiguos y un escritorio con papeles desordenados. Algo en estos documentos llama tu atención. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Revisar los documentos", siguiente: "revisarDocumentos" },
+      b: { texto: "Buscar una salida alternativa", siguiente: "buscarSalida" },
+      c: { texto: "Esconderte en la biblioteca", siguiente: "esconderBiblioteca" }
+    }
+  },
+
+  enfrentarGuardia: {
+    texto: "Decides enfrentar al guardia. Con firmeza en tu voz, le preguntas si sabe lo que realmente está sucediendo aquí. El guardia parece desconcertado, pero su mano se mueve hacia su radio. La situación se vuelve crítica. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Reducir al guardia rápidamente", siguiente: "reducirGuardia" },
+      b: { texto: "Escapar mientras puedes", siguiente: "escaparGuardia" },
+      c: { texto: "Intentar persuadirlo para que te deje pasar", siguiente: "persuadirGuardia" }
+    }
+  },
+
+  // Nodo después de "Buscar una entrada trasera"
+  seguirVoces: {
+    texto: "Sigues las voces a lo largo del pasillo, hasta llegar a una sala iluminada tenuemente. Desde tu escondite, ves a un grupo de personas realizando lo que parece ser un ritual secreto. Algo oscuro está en juego. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Interrumpir el ritual", siguiente: "interrumpirRitual" },
+      b: { texto: "Observar y grabar en secreto", siguiente: "grabarSecreto" },
+      c: { texto: "Buscar evidencia en otro lugar", siguiente: "buscarEvidencia" }
+    }
+  },
+
+  esconderSombras: {
+    texto: "Te escondes en las sombras mientras las voces se acercan. Escuchas fragmentos de conversación sobre un plan inminente que podría cambiar el destino de muchas personas. La conspiración es más grande de lo que pensabas. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Seguir escuchando", siguiente: "seguirEscuchando" },
+      b: { texto: "Intentar interceptar a los conspiradores", siguiente: "interceptarConspiradores" },
+      c: { texto: "Salir y buscar más pistas", siguiente: "buscarPistas" }
+    }
+  },
+
+  encontrarMapa: {
+    texto: "Buscas un mapa del lugar y lo encuentras en una pared. El Bohemian Club es mucho más grande de lo que imaginabas, con túneles subterráneos y cámaras ocultas. Sabes que cada segundo cuenta. ¿Qué haces?",
+    opciones: {
+      a: { texto: "Dirigirte a las cámaras ocultas", siguiente: "camaraOculta" },
+      b: { texto: "Seguir explorando los túneles", siguiente: "explorarTuneles" },
+      c: { texto: "Salir y buscar refuerzos", siguiente: "buscarRefuerzos" }
+    }
+  },
+
+  // Nodo Final (Ejemplo de Finales)
+  finalExitoso: {
+    texto: "Después de sortear innumerables peligros, logras descubrir la verdad sobre la conspiración y alertar a las autoridades. El Bohemian Club es desmantelado y te conviertes en un héroe. Sin embargo, algunas preguntas quedan sin respuesta. Fin.",
+    opciones: {}
+  },
+
+  finalDesastroso: {
+    texto: "La conspiración se revela como más grande y peligrosa de lo que esperabas. Eres capturado antes de poder exponer la verdad. Tus últimos pensamientos son de arrepentimiento por no haber sido más cuidadoso. Fin.",
+    opciones: {}
+  },
+
+  finalMisterioso: {
+    texto: "Escapas con información vital, pero algo no cuadra. Cuando vuelves a revisar tus notas, te das cuenta de que la evidencia ha desaparecido. ¿Acaso todo fue una ilusión, o el Bohemian Club tiene más poder del que imaginabas? Fin.",
+    opciones: {}
+  }
 
 
 
