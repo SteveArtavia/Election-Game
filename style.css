@@ -11,6 +11,7 @@ input{
     background-color: black !important;
     border: 1px solid greenyellow !important;
     width: 300px !important;
+    margin: 1em;
     color: greenyellow !important;
     padding: 0.2em 1em;
     text-align: center;
