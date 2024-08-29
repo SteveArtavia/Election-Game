@@ -12,27 +12,27 @@
 </head>
 <body>
     
-    <div class="container text-center mt-3" id="intro" style="display: none;">
-        <h1>The Bohemian Club</h1>
+    <div class="container text-center" id="intro" style="display: none;">
+        <h1>The<br>Bohemian<br>Club</h1>
     </div>
 
     <div class="container animate__animated animate__fadeIn animate_slower" id="startScreen">
-        <div class="card p-4 m-4">
+        <div class="card p-4 mt-4">
             <div class="card-body text-center">
                 <label for="name">Ingresa tu nombre:</label><br>
                 <p id="validationMessage"></p>
-                <input type="text" id="nameInput"><br><br>
+                <input type="text" id="nameInput"><br>
                 <button id="startBtn">Start</button>
             </div>
         </div>
     </div>
 
-    <div class="container p-4 m-4" id="loadingScreen" style="display: none;">
+    <div class="container p-4 m-2" id="loadingScreen" style="display: none;">
         <p class="animate__animated animate__fadeIn animate__infinite">Loading...</p>
     </div>
 
     <div class="container" id="playScreen" style="display: none;">
-        <div class="card p-4 m-4">
+        <div class="card p-4 m-2">
             <div class="card-body">
                 <p id="displayTexto"></p>
                 <div id="optionsContainer" class="text-center"></div>
@@ -44,6 +44,6 @@
     <audio src="assets/fondo.mp3" id="musicaFondo" loop></audio>
     <audio src="assets/puerta.mp3" id="sonidoPuerta"></audio>
 
-    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
