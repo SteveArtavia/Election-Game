@@ -9,7 +9,9 @@ const startScreen = document.getElementById('startScreen');
 
 const playScreen = document.getElementById('playScreen');
 const loadingScreen = document.getElementById('loadingScreen');
-const playerName = document.getElementById('nameInput');
+const playerNameInput = document.getElementById('nameInput');
+
+let playerName = '';
 
 document.addEventListener('DOMContentLoaded', () => {
     const music = document.getElementById('musicaFondo');
@@ -48,12 +50,14 @@ const startGame = () => {
 
     startScreen.style.display = 'none';
 
-    renderStory(playerName.value)
+    playerName = playerNameInput.value;
+
+    renderStory(playerName);
     
 };
 
 startBtn.addEventListener('click', () => {
-    if(playerName.value === ''){
+    if(playerNameInput.value === ''){
         const validationMessage = document.getElementById('validationMessage');
         validationMessage.textContent = 'Debes ingresar un nombre';
     } else {
@@ -70,7 +74,7 @@ const optionsContainer = document.getElementById('optionsContainer');
 
 const renderStory = () => {
     const section = story[seccionActual];
-    const mensaje = section.texto;
+    const mensaje = section.texto.replace(/{playerName}/g, playerName);
     displayTexto.innerHTML = mensaje;
 
     if(seccionActual ==="entrada"){
@@ -81,13 +85,33 @@ const renderStory = () => {
 
     optionsContainer.innerHTML = '';
 
+    if(seccionActual === "verificarCodigo"){
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'codigoInput';
+        optionsContainer.appendChild(input);
+
+        const btn = document.createElement('button');
+        btn.textContent = 'Verificar';
+        optionsContainer.appendChild(btn);
+        btn.addEventListener('click', () => {
+            const codigo = document.getElementById('codigoInput').value;
+            if(codigo === '0094'){
+                seccionActual = 'puertaAbierta';
+            }else{
+                alert('Codigo incorrecto, intenta de nuevo');
+            }
+            renderStory();
+        })
+    }
+
     for (const key in section.opciones){
         const opcion = section.opciones[key];
         const button = document.createElement('button');
         button.textContent = opcion.texto;
         button.addEventListener('click', () => {
             const sound = document.getElementById('buttonSound');
-            sound.currentTime =0;
+            sound.currentTime = 0;
             sound.play();
 
             seccionActual = opcion.siguiente;
@@ -99,4 +123,4 @@ const renderStory = () => {
 }
 
 renderStory();
-
+export default playerName;
